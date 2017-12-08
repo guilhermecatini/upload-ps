@@ -2,7 +2,7 @@
 
 const app = angular.module('MyApp', ['ui.router'])
 
-app.value('APIHOST', 'http://localhost:3000')
+app.value('APIHOST', 'http://catini.org:3000')
 
 app.config(function($stateProvider, $urlRouterProvider) {
   
