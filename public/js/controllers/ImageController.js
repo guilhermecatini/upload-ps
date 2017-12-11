@@ -31,12 +31,15 @@ app.controller('ImageController', function($scope, $http, APIHOST){
         vm.LOADING = true
         $http({
           method: 'POST',
-          url: 'https://api.imgur.com/3/image',
-          headers: {
-            Authorization: 'Client-ID 2e4460f98f2549e'
-          },
+          //url: 'https://api.imgur.com/3/image',
+          url: '/files/upload',
+          // headers: {
+          //   Authorization: 'Client-ID 2e4460f98f2549e'
+          // },
           data: {
-            image: event.target.result.split(',')[1]
+            //image: event.target.result.split(',')[1]
+            base64: event.target.result.split(',')[1],
+            extension: 'png'
           }
         }).then(function(ret){
           $http({
@@ -44,13 +47,16 @@ app.controller('ImageController', function($scope, $http, APIHOST){
             url: APIHOST + '/images/create',
             data: {
               _userId: localStorage.getItem('userId'),
-              urlImage: ret.data.data.link
+              urlImage: ret.data.link
             }
           }).then(function(ret2){
             vm.LOADING = false
-            vm.seuLink = ret.data.data.link
-            vm.urlImagem = ret.data.data.link
+            vm.seuLink = ret.data.link
+            vm.urlImagem = ret.data.link
+            // vm.seuLink = ret.data.data.link
+            // vm.urlImagem = ret.data.data.link
           })
+
         })
       }
       reader.readAsDataURL(blob)

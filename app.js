@@ -9,6 +9,8 @@ mongoose.connect('mongodb://localhost/uploadps', { useMongoClient:true })
 
 const users = require('./api/v1/routes/UserRoutes')
 const images = require('./api/v1/routes/ImageRoutes')
+const UploadFileAPI  = require('./api/v1/routes/UploadFileRoutes')
+
 
 const app = express()
 
@@ -25,13 +27,14 @@ app.set('view engine', 'jade')
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/users', users)
 app.use('/images', images)
+app.use('/files', UploadFileAPI)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
