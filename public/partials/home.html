@@ -37,16 +37,18 @@ div.content {
 
 <div id="divLoading" class="show" data-ng-show="vm.LOADING"></div>
 
-<div class="row">
+<div class="container">
+  <div class="row">
 
-  <div class="jumbotron">
-    <div class="container">
-      <p>Após tirar o Print Screen, Pressione CTRL + V nessa página.</p>
+    <div class="jumbotron">
+      <div class="container">
+        <p>Após tirar o Print Screen, Pressione CTRL + V nessa página.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" data-ng-show="vm.urlImagem">
-    <p style="font-weight: bold">Seu link é: <a href="{{vm.seuLink}}" target="_blank">{{vm.seuLink}}</a></p>
-    <img class="img img-thumbnail" data-ng-src="{{vm.urlImagem}}">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" data-ng-show="vm.urlImagem">
+      <p style="font-weight: bold"><a href="{{vm.seuLink}}" target="_blank">Clique Aqui Para Abrir a Imagem</a></p>
+      <img class="img img-thumbnail" data-ng-src="{{vm.urlImagem}}">
+    </div>
   </div>
 </div>

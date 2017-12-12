@@ -17,6 +17,13 @@ function generateFileId() {
   return text;
 }
 
+router.get('/retrieve/:userId', (req, res) => {
+  const query = { _userId: req.params.userId }
+  UploadFileModel.find(query, (err, data) => {
+    callback(res, err, data)
+  })
+});
+
 router.post('/upload', (req, res) => {
 
   const serverUrl = '//'+req.headers.host
@@ -31,14 +38,17 @@ router.post('/upload', (req, res) => {
   const inf = {
     url: '/files/upload/'+fileName,
     fileKey: fileName,
-    extension: extension
+    extension: extension,
+    _userId: req.body._userId
   }
+
+  console.log(inf)
 
 
   fs.writeFile(completePath, base64, 'base64', function(){
 
     UploadFileModel.create(inf, (err,data) => {
-      res.json( { link : serverUrl + inf.url } )
+      res.json( data )
     })
     
   })

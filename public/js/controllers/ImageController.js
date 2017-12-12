@@ -9,9 +9,10 @@ app.controller('ImageController', function($scope, $http, APIHOST){
   vm.getImages = function() {
     $http({
       method: 'GET',
-      url: APIHOST + '/images/retrieve/' + localStorage.getItem('userId')
-    }).then(function(ret){
-      vm.Images = ret.data
+      url: APIHOST + '/files/retrieve/' + localStorage.getItem('userId')
+    }).then(function(response){
+      console.log(response.data)
+      vm.Images = response.data
     })
   }
 
@@ -29,6 +30,22 @@ app.controller('ImageController', function($scope, $http, APIHOST){
       let reader = new FileReader()
       reader.onload = function(event) {
         vm.LOADING = true
+        $http({
+          method: 'POST',
+          url: '/files/upload',
+          data: {
+            base64: event.target.result.split(',')[1],
+            extension: 'png',
+            _userId: localStorage.getItem('userId')
+          }
+        }).then(function(response){
+          console.log(response.data)
+          vm.seuLink = response.data.url
+          vm.urlImagem = response.data.url
+          vm.LOADING = false
+        })
+
+        /*
         $http({
           method: 'POST',
           //url: 'https://api.imgur.com/3/image',
@@ -58,6 +75,7 @@ app.controller('ImageController', function($scope, $http, APIHOST){
           })
 
         })
+        */
       }
       reader.readAsDataURL(blob)
     }
