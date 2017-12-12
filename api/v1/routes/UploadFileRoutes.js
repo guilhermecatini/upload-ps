@@ -24,7 +24,7 @@ router.post('/upload', (req, res) => {
   const base64       = req.body.base64
   const extension    = req.body.extension
 
-  const uploadFolder = './files/upload/'
+  const uploadFolder = './public/files/upload/'
   const fileName     = generateFileId() + '.' + extension
   const completePath = uploadFolder + fileName
 
