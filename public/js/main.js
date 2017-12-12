@@ -2,7 +2,7 @@
 
 const app = angular.module('MyApp', ['ui.router'])
 
-app.value('APIHOST', 'http://192.168.15.22:3000')
+app.value('APIHOST', 'http://' + window.location.host )
 
 app.config(function($stateProvider, $urlRouterProvider) {
   
