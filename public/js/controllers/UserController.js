@@ -38,8 +38,8 @@ app.controller('UserController', function($http, $state, APIHOST){
           type: 'success',
           timer: 2000,
           showConfirmButton: false
-        }, function() { 
-          swal.close() 
+        }).then(function(result){
+          swal.close()
           $state.go('menu.home')
         });
       }
@@ -57,7 +57,7 @@ app.controller('UserController', function($http, $state, APIHOST){
       type: 'success',
       timer: 2000,
       showConfirmButton: false
-    }, function() { 
+    }).then(function(result){
       swal.close() 
       $state.go('signin')
     })
