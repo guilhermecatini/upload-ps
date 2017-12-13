@@ -11,8 +11,34 @@ app.controller('ImageController', function($scope, $http, APIHOST){
       method: 'GET',
       url: APIHOST + '/files/retrieve/' + localStorage.getItem('userId')
     }).then(function(response){
-      console.log(response.data)
       vm.Images = response.data
+    })
+  }
+
+  vm.removerImagem = function(id) {
+    swal({
+      title: 'Você tem certeza?',
+      text: "Essa operação não tem volta.",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eu quero remover!',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.value) {
+        $http({
+          method: 'GET',
+          url: APIHOST + '/files/remove/' + id
+        }).then(function(response){
+          vm.getImages()
+          swal(
+            'Removido!',
+            'Sua imagem foi removida.',
+            'success'
+          )
+        })
+      }
     })
   }
 

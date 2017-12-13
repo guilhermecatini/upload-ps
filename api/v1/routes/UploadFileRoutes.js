@@ -24,6 +24,13 @@ router.get('/retrieve/:userId', (req, res) => {
   })
 });
 
+router.get('/remove/:_id', (req, res) => {
+  const query = { _id: req.params._id }
+  UploadFileModel.remove(query, (err, data) => {
+    callback(res, err, data)
+  })
+})
+
 router.post('/upload', (req, res) => {
 
   const serverUrl = '//'+req.headers.host
