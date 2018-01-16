@@ -7,6 +7,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/uploadps', { useMongoClient:true })
 
+const entidade = require('./api/v1/routes/EntidadeRoutes')
+
 const users = require('./api/v1/routes/UserRoutes')
 const images = require('./api/v1/routes/ImageRoutes')
 const UploadFileAPI  = require('./api/v1/routes/UploadFileRoutes')
@@ -31,6 +33,8 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use('/api/v1/entidade', entidade)
 
 app.use('/users', users)
 app.use('/images', images)

@@ -44,6 +44,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controllerAs: 'vm'
   })
 
+  .state('menu.cns-entidade', {
+    url: '/entidade/find',
+    templateUrl: '../partials/entidades.html',
+    controller: 'EntidadeController',
+    controllerAs: 'vm'
+  })
+
+  .state('menu.frm-entidade', {
+    url: '/entidade/:_id',
+    templateUrl: '../partials/entidade.html',
+    controller: 'EntidadeController',
+    controllerAs: 'vm'
+  })
+
+  .state('menu.frm-entidade-endereco', {
+    url: '/entidade/:_id/endereco',
+    templateUrl: '../partials/entidade-endereco.html',
+    controller: 'EntidadeController',
+    controllerAs: 'vm'
+  })
+
+
   
 
 })
