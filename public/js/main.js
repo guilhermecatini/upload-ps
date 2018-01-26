@@ -2,10 +2,10 @@
 
 const app = angular.module('MyApp', ['ui.router'])
 
-app.value('APIHOST', 'http://' + window.location.host )
+app.value('APIHOST', window.location.protocol + '//' + window.location.host )
 
 app.config(function($stateProvider, $urlRouterProvider) {
-  
+
   $urlRouterProvider.otherwise('/signin')
 
   $stateProvider
@@ -66,6 +66,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
 
 
-  
+
 
 })
