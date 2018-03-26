@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ImageController', function($scope, $http, APIHOST, $timeout){
+app.controller('ImageController', function($scope, $http, APIHOST){
 
   let vm = this
 
@@ -15,31 +15,48 @@ app.controller('ImageController', function($scope, $http, APIHOST, $timeout){
     })
   }
 
+  window.cancelarRemoverImagem = function() {
+    $.toast().reset('all');
+    vm.getImages();
+  }
+
   vm.removerImagem = function(id) {
-    swal({
-      title: 'Você tem certeza?',
-      text: "Essa operação não tem volta.",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, eu quero remover!',
-      cancelButtonText: 'Não'
-    }).then((result) => {
-      if (result.value) {
+
+    var ax = angular.copy(vm.Images);
+    vm.Images = new Array();
+
+    ax.forEach(function(v){
+      if ( v._id != id ) {
+        vm.Images.push(v);
+      }
+    });
+
+    $.toast({
+      text: "<a onclick=\"cancelarRemoverImagem()\" href='javascript:void(0)'>Clique aqui para desfazer.</a>",
+      heading: 'Imagem Removida',
+      icon: 'success',
+      showHideTransition: 'plain',
+      allowToastClose: true,
+      hideAfter: 5000,
+      stack: 5,
+      position: 'bottom-right',
+      textAlign: 'left',
+      loader: true,
+      loaderBg: '#FFF',
+      bgColor: '#2D2D2D',
+      textColor: 'white',
+      beforeShow: function () { },
+      afterShown: function () { },
+      beforeHide: function () { },
+      afterHidden: function () {
         $http({
           method: 'GET',
           url: APIHOST + '/files/remove/' + id
         }).then(function(response){
-          vm.getImages()
-          swal(
-            'Removido!',
-            'Sua imagem foi removida.',
-            'success'
-          )
+          vm.getImages();
         })
       }
-    })
+    });
   }
 
   $('#inputSeuLink').click(function(){
