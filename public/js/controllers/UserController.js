@@ -4,6 +4,10 @@ app.controller('UserController', function($http, $state, APIHOST){
 
   let vm = this
 
+  if (localStorage.getItem('userId') != null) {
+    $state.go('menu.home')
+  }
+
   vm.User = {}
 
   vm.SignUp = function() {

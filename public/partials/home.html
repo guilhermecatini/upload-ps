@@ -47,7 +47,10 @@ div.content {
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" data-ng-show="vm.urlImagem">
-      <p style="font-weight: bold"><a href="{{vm.seuLink}}" target="_blank">Clique Aqui Para Abrir a Imagem</a></p>
+      <!-- <p style="font-weight: bold"><a href="{{vm.seuLink}}" target="_blank">Clique Aqui Para Abrir a Imagem</a></p> -->
+      <label>Clique no link para copiar</label>
+      <input style="text-align: center;" type="text" id="inputSeuLink" data-ng-model="vm.inputSeuLink" class="form-control" readonly="" />
+      <hr />
       <img class="img img-thumbnail" data-ng-src="{{vm.urlImagem}}">
     </div>
   </div>

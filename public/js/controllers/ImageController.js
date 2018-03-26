@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ImageController', function($scope, $http, APIHOST){
+app.controller('ImageController', function($scope, $http, APIHOST, $timeout){
 
   let vm = this
 
@@ -42,6 +42,22 @@ app.controller('ImageController', function($scope, $http, APIHOST){
     })
   }
 
+  $('#inputSeuLink').click(function(){
+    $('#inputSeuLink').select();
+    document.execCommand('Copy');
+    $(this).tooltip({
+      placement: 'auto',
+      trigger: 'manual',
+      title: 'Link Copiado'
+    });
+    $(this).tooltip('show');
+    setTimeout(function(){
+      $('#inputSeuLink').tooltip('hide');
+    }, 2000)
+  });
+
+    
+
   document.onpaste = function(event){
     let items = (event.clipboardData || event.originalEvent.clipboardData).items   
 
@@ -65,9 +81,10 @@ app.controller('ImageController', function($scope, $http, APIHOST){
             _userId: localStorage.getItem('userId')
           }
         }).then(function(response){
-          console.log(response.data)
-          vm.seuLink = response.data.url
-          vm.urlImagem = response.data.url
+          console.log(response.data);
+          vm.seuLink = response.data.url;
+          vm.urlImagem = response.data.url;
+          vm.inputSeuLink = document.location.protocol + '//' + document.location.host + response.data.url;
           vm.LOADING = false
         })
 
