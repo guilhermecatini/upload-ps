@@ -14,6 +14,9 @@ const images = require('./api/v1/routes/ImageRoutes')
 const UploadFileAPI  = require('./api/v1/routes/UploadFileRoutes')
 
 
+const ClientesAPI  = require('./api/v1/routes/ClienteRoutes')
+
+
 const app = express()
 
 app.use(function(req, res, next) {
@@ -39,6 +42,9 @@ app.use('/api/v1/entidade', entidade)
 app.use('/users', users)
 app.use('/images', images)
 app.use('/files', UploadFileAPI)
+
+
+app.use('/api/v1/cliente', ClientesAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
